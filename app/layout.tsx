@@ -1,7 +1,7 @@
 // app/layout.tsx
 import "./globals.css";
 import Header from "./components/header";
-import Footer from "./components/footer"; // ایمپورت کردن کامپوننت فوتر
+import Footer from "./components/footer";
 
 export default function RootLayout({
   children,
@@ -27,7 +27,7 @@ export default function RootLayout({
           <h2>hello</h2>
           <h2>hello</h2>
         </div>
-        <Footer /> {/* اضافه کردن کامپوننت فوتر */}
+        <Footer />
       </body>
     </html>
   );
