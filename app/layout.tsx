@@ -12,21 +12,47 @@ export default function RootLayout({
     <html lang="en" dir="rtl">
       <body>
         <Header />
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
+        <div>hqlldsakdla</div>
         {children}
-        <div>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-        </div>
         <Footer />
       </body>
     </html>
