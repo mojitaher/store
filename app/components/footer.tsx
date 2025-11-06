@@ -1,4 +1,3 @@
-// components/Footer.tsx
 "use client";
 
 import React, { useEffect, useRef } from "react";
@@ -91,11 +90,10 @@ const Footer: React.FC = () => {
         className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-400 rounded-full w-10 h-10 flex items-center justify-center text-white text-2xl cursor-pointer shadow-md hover:bg-red-500 transition-colors duration-300" // حذف transform rotate-180
         aria-label="Scroll to top"
       >
-        &#9650; {/* کاراکتر Unicode برای فلش بالا */}
+        &#9650; {/* Scroll to Top*/}
       </div>
 
       <div className="container mx-auto px-4 pt-8">
-        {/* Top Section: Social Media and Brand */}
         <div className="flex flex-col md:flex-row justify-between items-center pb-5 border-b border-gray-300">
           <div className="flex items-center space-x-4 space-x-reverse mb-2 md:mb-0">
             {/* <h3 className="text-lg font-bold">شبکه های اجتماعی ما</h3> */}
