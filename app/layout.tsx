@@ -13,20 +13,6 @@ export default function RootLayout({
       <body>
         <Header />
         {children}
-        <div>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-          <h2>hello</h2>
-        </div>
         <Footer /> {/* اضافه کردن کامپوننت فوتر */}
       </body>
     </html>

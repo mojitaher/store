@@ -38,8 +38,8 @@ export default function Header() {
             />
           </div>
         </div>
-
-        <div className=" absolute -top-1/2 left-1/2 flex flex-col items-center justify-center rounded-full bg-red-300 w-32 h-32  shadow-lg overflow-hidden">
+        {/* logo if rtl and ltr*/}
+        <div className="absolute -top-1/2 right-1/2 flex flex-col items-center justify-center rounded-full bg-red-300 w-32 h-32  shadow-lg overflow-hidden">
           <Image
             src={rozh}
             alt="rozh"
@@ -48,12 +48,12 @@ export default function Header() {
             className="rounded-full"
           />
         </div>
-        <div className="flex items-center space-x-2 rtl:space-x-reverse">
+        <div className="flex items-center space-x-1 gap-2 rtl:space-x-reverse">
           <User size={18} />
           <a href="#" className="hover:text-green-600">
             ورود
           </a>
-          <span>\</span>
+          <span>|</span>
           <a href="#" className="hover:text-green-600">
             ثبت نام
           </a>
