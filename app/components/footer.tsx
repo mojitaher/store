@@ -153,35 +153,34 @@ const Footer: React.FC = () => {
             </a>
           </div>
 
-          
-        {/* Navigation Section */}
-        <nav className="">
-          <ul className="flex justify-center flex-wrap gap-x-8 gap-y-2 list-none p-0 m-0">
-            <li>
-              <a
-                href="#"
-                className="text-gray-800 hover:text-red-400 font-bold scroll-home"
-              >
-                صفحه اصلی
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-800 hover:text-red-400 font-bold"
-              >
-                فروشگاه
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-800 hover:text-red-400 font-bold"
-              >
-                درباره ما
-              </a>
-            </li>
-            {/* <li>
+          {/* Navigation Section */}
+          <nav className="">
+            <ul className="flex justify-center flex-wrap gap-x-8 gap-y-2 list-none p-0 m-0">
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-800 hover:text-red-400 font-bold scroll-home"
+                >
+                  صفحه اصلی
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-800 hover:text-red-400 font-bold"
+                >
+                  فروشگاه
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-800 hover:text-red-400 font-bold"
+                >
+                  درباره ما
+                </a>
+              </li>
+              {/* <li>
               <a
                 href="#"
                 className="text-gray-800 hover:text-red-400 font-bold"
@@ -189,7 +188,7 @@ const Footer: React.FC = () => {
                 تماس با ما
               </a>
             </li> */}
-            {/* <li>
+              {/* <li>
               <a
                 href="#"
                 className="text-gray-800 hover:text-red-400 font-bold"
@@ -197,8 +196,8 @@ const Footer: React.FC = () => {
                 وبلاگ
               </a>
             </li> */}
-          </ul>
-        </nav>
+            </ul>
+          </nav>
 
           <div className="text-center md:text-left">
             <h2 className="text-2xl font-bold text-red-400">رومنس تایم</h2>
