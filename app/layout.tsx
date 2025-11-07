@@ -12,46 +12,7 @@ export default function RootLayout({
     <html lang="en" dir="rtl">
       <body>
         <Header />
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
-        <div>hqlldsakdla</div>
+
         {children}
         <Footer />
       </body>

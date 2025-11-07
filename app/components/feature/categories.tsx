@@ -1,9 +1,4 @@
-"use client";
-import { useEffect, useRef } from "react";
 import Card from "./Card";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
 const Cards = [
   {
     id: 1,
@@ -25,33 +20,37 @@ const Cards = [
   },
 ];
 export default function Category() {
-  const cardsRef = useRef<{ [key: number]: HTMLDivElement | null }>({});
-
-  useEffect(() => {
-    Object.values(cardsRef.current).forEach((card, i) => {
-      if (card) {
-        gsap.from(card, {
-          opacity: 0,
-          x: 100,
-          duration: 0.8,
-          delay: i * 0.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        });
-      }
-    });
-  }, []);
+  // const container = useRef<HTMLDivElement>(null);
+  // gsap.registerPlugin(ScrollTrigger);
+  // useGSAP(() => {
+  //   const tl = gsap.timeline({
+  //     scrollTrigger: {
+  //       trigger: container.current,
+  //       start: "top top",
+  //       end: "180%",
+  //       scrub: 1.8,
+  //       pin: true,
+  //     },
+  //   });
+  //   tl.from(".cat", {
+  //     x: 150,
+  //     opacity: 0,
+  //     duration: 1,
+  //     ease: "power3.out",
+  //     scrollTrigger: {
+  //       trigger: ".cat",
+  //       start: "top top",
+  //       toggleActions: "play none none reverse",
+  //     },
+  //   });
+  // });
   return (
     <div className="flex justify-between">
       {Cards.map((data) => (
         <div
-          ref={(el) => (cardsRef.current[data.id] = el)}
           key={data.id}
-          className="text-center"
+          className="text-center cat"
+          // ref={container}
         >
           <Card img={data.img} title={data.title} text={data.text} />
         </div>
