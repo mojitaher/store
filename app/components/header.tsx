@@ -1,10 +1,19 @@
+"use client";
 import { ShoppingCart, Search, User } from "lucide-react";
 import Image from "next/image";
 import rozh from "../../public/download (4).jpg";
+import LoginForm from "./feature/loginform";
+import { useState } from "react";
+import RegesterForm from "./feature/regesterForm";
 
 export default function Header() {
+  const [login, setlogin] = useState<boolean>(false);
+  const [regester, setRegester] = useState<boolean>(false);
   return (
     <header className="w-full p-5 ">
+      {login && <LoginForm closeBtn={() => setlogin(false)} />}
+      {regester && <RegesterForm closeBtn={() => setRegester(false)} />}
+
       <div className="bg-gray-100 text-gray-700 text-sm py-2 px-6 flex justify-between items-center rounded-t-3xl w-2/3 mx-auto">
         <p>به فروشگاه ما خوش آمدید</p>
         <div className="flex items-center space-x-4 rtl:space-x-reverse">
@@ -50,13 +59,19 @@ export default function Header() {
         </div>
         <div className="flex items-center space-x-1 gap-2 rtl:space-x-reverse">
           <User size={18} />
-          <a href="#" className="hover:text-green-600">
+          <button
+            onClick={() => setlogin(true)}
+            className="hover:text-green-600"
+          >
             ورود
-          </a>
+          </button>
           <span>|</span>
-          <a href="#" className="hover:text-green-600">
+          <button
+            onClick={() => setRegester(true)}
+            className="hover:text-green-600"
+          >
             ثبت نام
-          </a>
+          </button>
         </div>
       </div>
 

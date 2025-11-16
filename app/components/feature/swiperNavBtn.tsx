@@ -7,16 +7,16 @@ export default function SwiperBtn() {
 "
     >
       <button
-        className="p-3 rounded-3xl bg-blue-400 "
-        onClick={() => swiper.slideNext()}
-      >
-        next
-      </button>
-      <button
         className="p-3 rounded-3xl  bg-blue-400 "
         onClick={() => swiper.slidePrev()}
       >
         prev
+      </button>
+      <button
+        className="p-3 rounded-3xl bg-blue-400 "
+        onClick={() => swiper.slideNext()}
+      >
+        next
       </button>
     </div>
   );
