@@ -1,7 +1,24 @@
 "use client";
 
+import LoginApi from "@/app/api/login";
+import useAuth from "@/app/context/auth";
+import { useState } from "react";
+
 export default function LoginForm({ closeBtn }: { closeBtn: () => void }) {
-  //   const { username, password, setUsername, setPassword, login } = useAuth();
+  const { login } = useAuth();
+  const [username, setName] = useState("");
+  const [password, setPass] = useState("");
+  async function handleLogin() {
+    await LoginApi({ username, password }).then((data) => {
+      console.log(username, password);
+      const token = data.access_token;
+      const user = {
+        username,
+        password,
+      };
+      login(user, token);
+    });
+  }
   return (
     <div
       className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
@@ -17,15 +34,20 @@ export default function LoginForm({ closeBtn }: { closeBtn: () => void }) {
           type="text"
           placeholder="نام کاربری"
           className="w-full p-3 border rounded-xl mb-4"
+          onChange={(e) => setName(e.target.value)}
         />
 
         <input
           type="password"
           placeholder="رمز عبور"
           className="w-full p-3 border rounded-xl mb-4"
+          onChange={(e) => setPass(e.target.value)}
         />
 
-        <button className="w-full py-3 bg-violet-600 text-white rounded-xl">
+        <button
+          className="w-full py-3 bg-violet-600 text-white rounded-xl"
+          onClick={handleLogin}
+        >
           ورود
         </button>
 

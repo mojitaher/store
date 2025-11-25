@@ -1,5 +1,11 @@
-import { redirect } from "next/navigation";
+"use client";
+import useAuth from "@/app/context/auth";
+import { useEffect } from "react";
 
 export default function Exit() {
-  return redirect("/");
+  const { logout } = useAuth();
+  useEffect(() => {
+    logout();
+  }, [logout]);
+  return null;
 }

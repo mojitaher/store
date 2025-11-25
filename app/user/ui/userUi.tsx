@@ -1,14 +1,30 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Dashboard from "./dashbord";
 import Orders from "./orders";
 import Settings from "./setting";
 import Exit from "./exit";
-import Image from "next/image";
-// import Header from "../components/header";
+import Auth from "@/app/api/auth";
+import useAuth from "@/app/context/auth";
+import { redirect } from "next/navigation";
+// import Image from "next/image";
+
 const SidebarItems = ["داشبورد", "سفارش ها", "تنظیمات", "خروج"];
 
 export default function UserUI() {
+  const { loading, token } = useAuth();
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    if (!token && !loading) {
+      redirect("/");
+    }
+  }, [loading, token]);
+  useEffect(() => {
+    if (token)
+      Auth(token).then((data) => {
+        setUser(data.name);
+      });
+  }, [token]);
   const ComponantMap: Record<number, FC> = {
     0: Dashboard,
     1: Orders,
@@ -23,6 +39,7 @@ export default function UserUI() {
   return (
     <div className="flex gap-6">
       {/* Sidebar */}
+      {loading && <p>loading...</p>}
 
       <aside className="w-72 min-h-screen bg-violet-300 p-6 flex flex-col gap-4 shadow-xl rounded-2xl">
         <div className="flex justify-between mb-5 items-center gap-3">
@@ -30,7 +47,7 @@ export default function UserUI() {
             {/* <Image src={"profile"} alt="profile" fill /> */}
           </div>
           <div>
-            <h1 className="text-black font-extrabold text-lg">{"user.name"}</h1>
+            <h1 className="text-black font-extrabold text-lg">{user}</h1>
             <span className="inline-flex gap-1 text-md">
               <p>موجودی:</p>
               <p className="text-green-300">{"user:pay"}$</p>
