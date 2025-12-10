@@ -15,7 +15,7 @@ export default function UserUI() {
   const { loading, token } = useAuth();
   const [user, setUser] = useState("");
   useEffect(() => {
-    if (!token && !loading) {
+    if (!token && !loading && !user) {
       redirect("/");
     }
   }, [loading, token]);

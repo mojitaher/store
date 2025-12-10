@@ -1,66 +1,60 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-
-// --- Types ---
-type ColorOption = {
-  id: number;
-  name: string;
-  hex: string;
+// import { Product } from "@/app/api/product";
+import { useState } from "react";
+type FilterDatatype = {
+  size: string | null;
+  maxPrice: number;
+  minPrice: number;
 };
 
-// --- Data ---
-const COLORS: ColorOption[] = [
-  { id: 1, name: 'مشکی', hex: '#000000' },
-  { id: 2, name: 'سفید', hex: '#ffffff' },
-  { id: 3, name: 'قرمز', hex: '#ef394e' }, 
-  { id: 4, name: 'سرمه‌ای', hex: '#21215b' },
-];
+const SIZES = ["S", "M", "L", "XL", "XLL"];
 
-const SIZES = ['S', 'M', 'L', 'XL', 'XXL'];
+type FilterProps = {
+  min: number;
+  max: number;
+  onFilterChange: (data: FilterDatatype) => void;
+};
 
-export default function FilterSidebar() {
+export default function FilterSidebar({
+  min,
+  max,
+  onFilterChange,
+}: FilterProps) {
   // --- States ---
-  const [maxPrice, setMaxPrice] = useState<number>(1399000);
-  const minPrice = 0;
-  const [selectedColors, setSelectedColors] = useState<number[]>([]);
-  const [selectedSize, setSelectedSize] = useState<string | null>('L');
+  const [maxPrice, setMaxPrice] = useState<number>(max);
+  const minPrice = min;
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   // --- Helpers ---
-  const formatPrice = (price: number) => new Intl.NumberFormat('fa-IR').format(price);
+  const formatPrice = (price: number) => price;
 
-  const toggleColor = (id: number) => {
-    if (selectedColors.includes(id)) {
-      setSelectedColors(prev => prev.filter(c => c !== id));
-    } else {
-      setSelectedColors(prev => [...prev, id]);
-    }
+  // handler
+  const handleSubmit = () => {
+    const data: FilterDatatype = { size: selectedSize, maxPrice, minPrice };
+    onFilterChange(data);
   };
-
   return (
     <aside className="sidebar">
       <div className="header">فیلترها</div>
 
       {/* فیلتر قیمت */}
       <div className="section">
-        <div className="section-title">
-          محدوده قیمت
-          <span className="arrow-icon">&#10095;</span>
-        </div>
+        <div className="section-title">محدوده قیمت</div>
 
         <div className="price-inputs">
           <div className="price-row">
             <span className="text-gray">از</span>
             <div>
               <span className="price-value">{formatPrice(minPrice)}</span>
-              <span className="currency">تومان</span>
+              <span className="currency">$</span>
             </div>
           </div>
           <div className="price-row">
             <span className="text-gray">تا</span>
             <div>
               <span className="price-value">{formatPrice(maxPrice)}</span>
-              <span className="currency">تومان</span>
+              <span className="currency">$</span>
             </div>
           </div>
         </div>
@@ -68,9 +62,9 @@ export default function FilterSidebar() {
         <div className="slider-container">
           <input
             type="range"
-            min={0}
-            max={2000000}
-            step={10000}
+            min={min}
+            max={max}
+            step={1}
             value={maxPrice}
             onChange={(e) => setMaxPrice(Number(e.target.value))}
             className="range-input"
@@ -82,23 +76,6 @@ export default function FilterSidebar() {
         </div>
       </div>
 
-      {/* فیلتر رنگ */}
-      <div className="section">
-        <div className="section-title">رنگ</div>
-        <div className="color-options">
-          {COLORS.map((color) => (
-            <div
-              key={color.id}
-              className={`color-item ${selectedColors.includes(color.id) ? 'active' : ''}`}
-              onClick={() => toggleColor(color.id)}
-            >
-              <span className="color-circle" style={{ backgroundColor: color.hex }}></span>
-              {color.name}
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* فیلتر سایز */}
       <div className="section">
         <div className="section-title">سایز</div>
@@ -106,12 +83,17 @@ export default function FilterSidebar() {
           {SIZES.map((size) => (
             <div
               key={size}
-              className={`size-box ${selectedSize === size ? 'active' : ''}`}
+              className={`size-box ${selectedSize === size ? "active" : ""}`}
               onClick={() => setSelectedSize(size)}
             >
               {size}
             </div>
           ))}
+        </div>
+        <div className="flex mt-10 justify-end items-end">
+          <button className="bg-green-300 rounded p-2" onClick={handleSubmit}>
+            اعمال تغییرات
+          </button>
         </div>
       </div>
 
@@ -130,10 +112,10 @@ export default function FilterSidebar() {
           border-radius: 8px;
           padding: 15px 20px;
           flex-shrink: 0;
-          
+
           /* Sticky Logic */
           position: sticky;
-          top: 20px; 
+          top: 20px;
           z-index: 10;
         }
 
@@ -151,7 +133,9 @@ export default function FilterSidebar() {
           border-bottom: 1px solid #f0f0f1;
           padding-bottom: 15px;
         }
-        .section:last-child { border-bottom: none; }
+        .section:last-child {
+          border-bottom: none;
+        }
 
         .section-title {
           font-size: 16px;
@@ -183,7 +167,9 @@ export default function FilterSidebar() {
           align-items: center;
           font-size: 14px;
         }
-        .text-gray { color: #81858b; }
+        .text-gray {
+          color: #81858b;
+        }
         .price-value {
           font-size: 19px;
           font-weight: 700;
@@ -194,10 +180,17 @@ export default function FilterSidebar() {
           text-align: center;
           display: inline-block;
         }
-        .currency { font-size: 12px; margin-right: 5px; color: #81858b; }
+        .currency {
+          font-size: 12px;
+          margin-right: 5px;
+          color: #81858b;
+        }
 
         /* Range Slider */
-        .slider-container { width: 100%; margin-top: 10px; }
+        .slider-container {
+          width: 100%;
+          margin-top: 10px;
+        }
         .range-labels {
           display: flex;
           justify-content: space-between;
@@ -205,15 +198,17 @@ export default function FilterSidebar() {
           color: #81858b;
           margin-top: 5px;
         }
-        
+
         .range-input {
           width: 100%;
           -webkit-appearance: none;
           background: transparent;
           cursor: pointer;
         }
-        .range-input:focus { outline: none; }
-        
+        .range-input:focus {
+          outline: none;
+        }
+
         /* Webkit Slider Thumb (Chrome, Safari, Edge) */
         .range-input::-webkit-slider-thumb {
           -webkit-appearance: none;
@@ -223,7 +218,7 @@ export default function FilterSidebar() {
           background: var(--primary-color);
           margin-top: -8px;
           border: 3px solid #fff;
-          box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
         }
         .range-input::-webkit-slider-runnable-track {
           width: 100%;
@@ -234,7 +229,11 @@ export default function FilterSidebar() {
         }
 
         /* Color Styles */
-        .color-options { display: flex; flex-wrap: wrap; gap: 10px; }
+        .color-options {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
         .color-item {
           display: flex;
           align-items: center;
@@ -247,7 +246,9 @@ export default function FilterSidebar() {
           color: var(--text-color);
           user-select: none;
         }
-        .color-item:hover { background-color: #f0f0f1; }
+        .color-item:hover {
+          background-color: #f0f0f1;
+        }
         .color-item.active {
           border-color: var(--primary-color);
           background-color: rgba(25, 191, 211, 0.05);
@@ -259,11 +260,15 @@ export default function FilterSidebar() {
           height: 16px;
           border-radius: 50%;
           margin-left: 8px;
-          border: 1px solid rgba(0,0,0,0.1);
+          border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         /* Size Styles */
-        .size-options { display: flex; gap: 10px; flex-wrap: wrap; }
+        .size-options {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+        }
         .size-box {
           width: 42px;
           height: 42px;
@@ -278,7 +283,9 @@ export default function FilterSidebar() {
           color: var(--text-color);
           user-select: none;
         }
-        .size-box:hover { border-color: #bababa; }
+        .size-box:hover {
+          border-color: #bababa;
+        }
         .size-box.active {
           border-color: var(--primary-color);
           color: var(--primary-color);
@@ -289,3 +296,101 @@ export default function FilterSidebar() {
     </aside>
   );
 }
+// "use client";
+
+// import { useEffect, useState } from "react";
+
+// type Props = {
+//   min: number;
+//   max: number;
+//   selectedSize: string | null;
+//   maxPrice: number;
+//   onFilterChange: (filter: { size: string | null; maxPrice: number }) => void;
+// };
+
+// const SIZES = ["S", "M", "L", "XL", "XXL"];
+
+// export default function FilterSidebar({
+//   min,
+//   max,
+//   selectedSize,
+//   maxPrice,
+//   onFilterChange,
+// }: Props) {
+//   const clamp = (v: number) => Math.max(min, Math.min(max, v));
+
+//   // local states
+//   const [localSize, setLocalSize] = useState<string | null>(
+//     selectedSize ?? null
+//   );
+//   const [localMaxPrice, setLocalMaxPrice] = useState<number>(
+//     clamp(maxPrice ?? max)
+//   );
+
+//   // sync props -> local state when parent changes initial values
+//   useEffect(() => {
+//     setLocalSize(selectedSize ?? null);
+//   }, [selectedSize]);
+
+//   useEffect(() => {
+//     setLocalMaxPrice(clamp(maxPrice ?? max));
+//   }, [maxPrice, min, max]);
+
+//   const handleApply = () => {
+//     // ensure value valid and then send to parent
+//     onFilterChange({ size: localSize, maxPrice: clamp(localMaxPrice) });
+//   };
+
+//   const formatPrice = (p: number) =>
+//     // show with thousands separators (fa-IR)
+//     p.toLocaleString("fa-IR");
+
+//   return (
+//     <aside className="sidebar">
+//       <div className="section">
+//         <div className="section-title">سایز</div>
+//         <div className="size-options">
+//           {SIZES.map((size) => (
+//             <button
+//               key={size}
+//               type="button"
+//               onClick={() => setLocalSize((s) => (s === size ? null : size))}
+//               className={`size-box ${localSize === size ? "active" : ""}`}
+//               aria-pressed={localSize === size}
+//             >
+//               {size}
+//             </button>
+//           ))}
+//         </div>
+//       </div>
+
+//       <div className="section mt-4">
+//         <div className="section-title">حداکثر قیمت</div>
+
+//         <div className="mb-2 text-sm text-gray-600">
+//           {formatPrice(localMaxPrice)} تومان
+//         </div>
+
+//         <input
+//           aria-label="حداکثر قیمت"
+//           type="range"
+//           min={min}
+//           max={max}
+//           value={localMaxPrice}
+//           onChange={(e) => setLocalMaxPrice(Number(e.target.value))}
+//           className="w-full"
+//         />
+//       </div>
+
+//       <div className="flex justify-end mt-3">
+//         <button
+//           onClick={handleApply}
+//           className="bg-green-300 p-2 rounded"
+//           type="button"
+//         >
+//           اعمال تغییرات
+//         </button>
+//       </div>
+//     </aside>
+//   );
+// }
