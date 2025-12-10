@@ -38,7 +38,7 @@ interface ProductRes {
 }
 
 export default async function getProducts(): Promise<ProductRes> {
-  const res = await axios("https://fakestoreapi.com/products");
+  const res = await axios(`https://fakestoreapi.com/products`);
   const price = res.data.map((p: any) => p.price * 10000);
   const min = Math.min(...price);
   const max = Math.max(...price);

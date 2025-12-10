@@ -5,8 +5,10 @@ import rozh from "../../public/download (4).jpg";
 import LoginForm from "./feature/loginform";
 import { useState } from "react";
 import RegesterForm from "./feature/regesterForm";
+import useAuth from "../context/auth";
 
 export default function Header() {
+  const { user, isLogin } = useAuth();
   const [login, setlogin] = useState<boolean>(false);
   const [regester, setRegester] = useState<boolean>(false);
   return (
@@ -26,6 +28,7 @@ export default function Header() {
           <a href="#" className="hover:text-green-600">
             LinkedIn
           </a>
+          {isLogin && <p>{user.username}</p>}
         </div>
       </div>
 

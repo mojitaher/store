@@ -1,14 +1,17 @@
 "use client";
 import { useState } from "react";
 import regesterApi from "../../api/regester";
+import useAuth from "@/app/context/auth";
 export default function RegesterForm({ closeBtn }: { closeBtn: () => void }) {
   //   const { username, password, setUsername, setPassword, login } = useAuth();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const { register } = useAuth()!;
   async function handleRegesterBtn() {
     await regesterApi({ email, pass, username }).then(() => {
       // use context
+      register(username);
       console.log(email, pass, username);
     });
   }

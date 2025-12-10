@@ -1,21 +1,22 @@
 "use client";
 
 import { Card, Badge, Button } from "flowbite-react";
+import Link from "next/link";
 
 export interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  images: string[];
+  category: {
     id: number;
-    title: string;
-    price: number;
-    description: string;
-    images: string[];
-    category: {
-      id: number;
-      name: string;
-      image: string;
-    };
-    sizes: string[];
-    colors: string[];
-  }
+    name: string;
+    image: string;
+  };
+  sizes: string[];
+  colors: string[];
+}
 interface ProductCardProps {
   product: Product;
 }
@@ -26,10 +27,9 @@ export default function ProductCard({ product }: ProductCardProps) {
       <Card
         className="max-w-sm w-full"
         imgAlt={product.title}
-        imgSrc={product.images[0]} 
+        imgSrc={product.images[0]}
       >
         <div className="flex flex-col gap-4">
-          
           <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-1">
             {product.title}
           </h5>
@@ -48,7 +48,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               ${product.price}
             </span>
             <Button color="blue" size="sm">
-              خرید کنید
+              <Link href={`/products/${product.id}`}>خرید کنید</Link>
             </Button>
           </div>
         </div>

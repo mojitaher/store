@@ -15,8 +15,8 @@ export default async function regesterApi({
       "https://moviesapi.codingfront.dev/api/v1/register",
       {
         email,
-        password: pass,
         name: username,
+        password: pass,
       }
     );
     console.log(res.data);
