@@ -10,13 +10,9 @@ export default function LoginForm({ closeBtn }: { closeBtn: () => void }) {
   const [password, setPass] = useState("");
   async function handleLogin() {
     await LoginApi({ username, password }).then((data) => {
-      console.log(username, password);
       const token = data.access_token;
-      const user = {
-        username,
-        password,
-      };
-      login(user, token);
+
+      login(token);
     });
   }
   return (

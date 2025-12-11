@@ -12,19 +12,19 @@ import { redirect } from "next/navigation";
 const SidebarItems = ["داشبورد", "سفارش ها", "تنظیمات", "خروج"];
 
 export default function UserUI() {
-  const { loading, token } = useAuth();
-  const [user, setUser] = useState("");
+  const { loading, token, user } = useAuth();
+  // const [user, setUser] = useState("");
   useEffect(() => {
     if (!token && !loading && !user) {
       redirect("/");
     }
   }, [loading, token]);
-  useEffect(() => {
-    if (token)
-      Auth(token).then((data) => {
-        setUser(data.name);
-      });
-  }, [token]);
+  // useEffect(() => {
+  //   if (token)
+  //     Auth(token).then((data) => {
+  //       setUser(data.name);
+  //     });
+  // }, [token]);
   const ComponantMap: Record<number, FC> = {
     0: Dashboard,
     1: Orders,
@@ -47,7 +47,7 @@ export default function UserUI() {
             {/* <Image src={"profile"} alt="profile" fill /> */}
           </div>
           <div>
-            <h1 className="text-black font-extrabold text-lg">{user}</h1>
+            <h1 className="text-black font-extrabold text-lg">{user?.name}</h1>
             <span className="inline-flex gap-1 text-md">
               <p>موجودی:</p>
               <p className="text-green-300">{"user:pay"}$</p>

@@ -9,11 +9,9 @@ export default function RegesterForm({ closeBtn }: { closeBtn: () => void }) {
   const [pass, setPass] = useState("");
   const { register } = useAuth()!;
   async function handleRegesterBtn() {
-    await regesterApi({ email, pass, username }).then(() => {
-      // use context
-      register(username);
-      console.log(email, pass, username);
-    });
+    const newUser = await regesterApi({ email, pass, username });
+    // use context
+    register(newUser);
   }
   return (
     <div

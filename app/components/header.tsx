@@ -6,6 +6,7 @@ import LoginForm from "./feature/loginform";
 import { useState } from "react";
 import RegesterForm from "./feature/regesterForm";
 import useAuth from "../context/auth";
+import Link from "next/link";
 
 export default function Header() {
   const { user, isLogin } = useAuth();
@@ -28,18 +29,20 @@ export default function Header() {
           <a href="#" className="hover:text-green-600">
             LinkedIn
           </a>
-          {isLogin && <p>{user.username}</p>}
+          {isLogin && <p className="text-green-300">{user.name}</p>}
         </div>
       </div>
 
       <div className="relative bg-white py-3 px-6 flex justify-between items-center rounded-3xl shadow-2xl">
         <div className="flex items-center space-x-4 rtl:space-x-reverse">
-          <button className="relative">
-            <ShoppingCart size={30} />
-            <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-              0
-            </span>
-          </button>
+          {isLogin && (
+            <button className="relative">
+              <ShoppingCart size={30} />
+              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                0
+              </span>
+            </button>
+          )}
           {/* search */}
           <div className="flex gap-5 items-center">
             <Search size={30} />
@@ -60,22 +63,34 @@ export default function Header() {
             className="rounded-full"
           />
         </div>
-        <div className="flex items-center space-x-1 gap-2 rtl:space-x-reverse">
-          <User size={18} />
-          <button
-            onClick={() => setlogin(true)}
-            className="hover:text-green-600"
-          >
-            ورود
-          </button>
-          <span>|</span>
-          <button
-            onClick={() => setRegester(true)}
-            className="hover:text-green-600"
-          >
-            ثبت نام
-          </button>
-        </div>
+        {!isLogin ? (
+          <div className="flex items-center space-x-1 gap-2 rtl:space-x-reverse">
+            <User size={18} />
+            <button
+              onClick={() => setlogin(true)}
+              className="hover:text-green-600"
+            >
+              ورود
+            </button>
+            <span>|</span>
+            <button
+              onClick={() => setRegester(true)}
+              className="hover:text-green-600"
+            >
+              ثبت نام
+            </button>
+          </div>
+        ) : (
+          <div>
+            <Link
+              href={"/user"}
+              className="inline-flex flex-col justify-center items-center gap-2 hover:text-red-400"
+            >
+              <User size={25} />
+              <p>پنل کاربر</p>
+            </Link>
+          </div>
+        )}
       </div>
 
       <nav className="bg-red-400 w-3/5 mx-auto text-white py-2 px-6 flex justify-around items-center font-medium rounded-b-3xl shadow-2xl">
