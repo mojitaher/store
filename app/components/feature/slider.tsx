@@ -2,34 +2,30 @@
 import { Autoplay, Keyboard, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
-import SwiperBtn from "./swiperNavBtn";
-import banner1 from "../../../public/download (5).jpg";
-import banner2 from "../../../public/download (6).jpg";
-import banner3 from "../../../public/download (7).jpg";
+import SwiperBtn from "../feature/swiperNavBtn"; 
+import banner1 from "../../../public/online-shopping6.jpg";
+import banner2 from "../../../public/9-golden-tips-for-online-store-photography-(3).webp";
+import banner3 from "../../../public/عکس-خرید-اینترنتی-با-موبایل-و-پس-زمینه-صورتی.webp";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 const image = [
-  {
-    id: 1,
-    src: banner1,
-  },
-  {
-    id: 2,
-    src: banner2,
-  },
-  {
-    id: 3,
-    src: banner3,
-  },
+  { id: 1, src: banner1 },
+  { id: 2, src: banner2 },
+  { id: 3, src: banner3 },
 ];
+
 export default function Slider() {
   return (
-    <div className="max-w-4xl mx-auto mt-10 mb-10 rounded-2xl overflow-hidden shadow-xl ">
+    
+    <div className="w-3/5 mx-auto mt-4 mb-10 rounded-2xl overflow-hidden shadow-xl relative group">
       <Swiper
         modules={[Navigation, Pagination, Autoplay, Keyboard]}
-        spaceBetween={30}
+        spaceBetween={0}
         slidesPerView={1}
-        keyboard={{
-          enabled: true,
-        }}
+        keyboard={{ enabled: true }}
         pagination={{ clickable: true }}
         autoplay={{
           delay: 3000,
@@ -46,11 +42,11 @@ export default function Slider() {
                 alt={`Slide ${img.id}`}
                 fill
                 className="object-cover"
-                // priority={id === 0}
               />
             </div>
           </SwiperSlide>
         ))}
+       
         <SwiperBtn />
       </Swiper>
     </div>
