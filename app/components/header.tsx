@@ -7,9 +7,10 @@ import { useState } from "react";
 import RegesterForm from "./feature/regesterForm";
 import useAuth from "../context/auth";
 import Link from "next/link";
+import { Button } from "flowbite-react";
 
 export default function Header() {
-  const { user, isLogin } = useAuth();
+  const { user, isLogin, logout } = useAuth();
   const [login, setlogin] = useState<boolean>(false);
   const [regester, setRegester] = useState<boolean>(false);
   return (
@@ -29,7 +30,6 @@ export default function Header() {
           <a href="#" className="hover:text-green-600">
             LinkedIn
           </a>
-          {isLogin && <p className="text-green-300">{user.name}</p>}
         </div>
       </div>
 
@@ -81,7 +81,8 @@ export default function Header() {
             </button>
           </div>
         ) : (
-          <div>
+          <div className="inline-flex justify-center items-center gap-10">
+            <p className="text-green-300">{user.name}</p>
             <Link
               href={"/user"}
               className="inline-flex flex-col justify-center items-center gap-2 hover:text-red-400"
@@ -89,33 +90,39 @@ export default function Header() {
               <User size={25} />
               <p>پنل کاربر</p>
             </Link>
+            <Button
+              className="text-red-500 cursor-pointer bg-red-200"
+              onClick={() => logout()}
+            >
+              خروج
+            </Button>
           </div>
         )}
       </div>
 
       <nav className="bg-red-400 w-3/5 mx-auto text-white py-2 px-6 flex justify-around items-center font-medium rounded-b-3xl shadow-2xl">
         <div className="w-1/2 flex justify-around text-2xl">
-          <a href="#" className="hover:text-gray-200">
+          <Link href="/products" className="hover:text-gray-200">
             رژ
-          </a>
-          <a href="#" className="hover:text-gray-200">
+          </Link>
+          <Link href="/products" className="hover:text-gray-200">
             ارایش چشم
-          </a>
-          <a href="#" className="hover:text-gray-200">
+          </Link>
+          <Link href="/products" className="hover:text-gray-200">
             کرم ها{" "}
-          </a>
+          </Link>
         </div>
 
         <div className="w-1/3 flex justify-around text-2xl">
-          <a href="#" className="hover:text-gray-200">
+          <Link href="/products" className="hover:text-gray-200">
             ماسک ها
-          </a>
-          <a href="#" className="hover:text-gray-200">
+          </Link>
+          <Link href="/products" className="hover:text-gray-200">
             محافظتی
-          </a>
-          <a href="#" className="hover:text-gray-200">
+          </Link>
+          <Link href="/products" className="hover:text-gray-200">
             سایر
-          </a>
+          </Link>
         </div>
       </nav>
     </header>

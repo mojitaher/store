@@ -6,7 +6,7 @@ export default function Orders() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" id="Cart">
       <h2 className="text-3xl font-bold">سفارش‌ها</h2>
 
       <div className="bg-white shadow-lg rounded-2xl overflow-hidden">
