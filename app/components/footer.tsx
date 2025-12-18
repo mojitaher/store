@@ -1,8 +1,13 @@
+
 "use client";
 
 import React, { useEffect, useRef } from "react";
 import L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import dynamic from "next/dynamic";
+
+const MapClient = dynamic(() => import("../components/feature/MapClient"), {
+  ssr: false,
+});
 
 // Fix for Leaflet's default icon issue with Webpack/Next.js
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -209,7 +214,8 @@ const Footer: React.FC = () => {
         <div className="flex flex-col-reverse md:flex-row justify-between items-start gap-8 my-5">
           {/* Map Section (Left) */}
           <div className="w-full md:w-1/2 h-[300px] overflow-hidden rounded-lg shadow-lg">
-            <div id="mapid" ref={mapRef} className="h-full w-full"></div>
+          <MapClient />
+
           </div>
 
           {/* Description (Right) */}
