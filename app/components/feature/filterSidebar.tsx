@@ -37,8 +37,7 @@ export default function FilterSidebar({
   return (
     <aside className="sidebar">
       <div className="header">فیلترها</div>
-
-      {/* فیلتر قیمت */}
+      
       <div className="section">
         <div className="section-title">محدوده قیمت</div>
 
@@ -296,101 +295,3 @@ export default function FilterSidebar({
     </aside>
   );
 }
-// "use client";
-
-// import { useEffect, useState } from "react";
-
-// type Props = {
-//   min: number;
-//   max: number;
-//   selectedSize: string | null;
-//   maxPrice: number;
-//   onFilterChange: (filter: { size: string | null; maxPrice: number }) => void;
-// };
-
-// const SIZES = ["S", "M", "L", "XL", "XXL"];
-
-// export default function FilterSidebar({
-//   min,
-//   max,
-//   selectedSize,
-//   maxPrice,
-//   onFilterChange,
-// }: Props) {
-//   const clamp = (v: number) => Math.max(min, Math.min(max, v));
-
-//   // local states
-//   const [localSize, setLocalSize] = useState<string | null>(
-//     selectedSize ?? null
-//   );
-//   const [localMaxPrice, setLocalMaxPrice] = useState<number>(
-//     clamp(maxPrice ?? max)
-//   );
-
-//   // sync props -> local state when parent changes initial values
-//   useEffect(() => {
-//     setLocalSize(selectedSize ?? null);
-//   }, [selectedSize]);
-
-//   useEffect(() => {
-//     setLocalMaxPrice(clamp(maxPrice ?? max));
-//   }, [maxPrice, min, max]);
-
-//   const handleApply = () => {
-//     // ensure value valid and then send to parent
-//     onFilterChange({ size: localSize, maxPrice: clamp(localMaxPrice) });
-//   };
-
-//   const formatPrice = (p: number) =>
-//     // show with thousands separators (fa-IR)
-//     p.toLocaleString("fa-IR");
-
-//   return (
-//     <aside className="sidebar">
-//       <div className="section">
-//         <div className="section-title">سایز</div>
-//         <div className="size-options">
-//           {SIZES.map((size) => (
-//             <button
-//               key={size}
-//               type="button"
-//               onClick={() => setLocalSize((s) => (s === size ? null : size))}
-//               className={`size-box ${localSize === size ? "active" : ""}`}
-//               aria-pressed={localSize === size}
-//             >
-//               {size}
-//             </button>
-//           ))}
-//         </div>
-//       </div>
-
-//       <div className="section mt-4">
-//         <div className="section-title">حداکثر قیمت</div>
-
-//         <div className="mb-2 text-sm text-gray-600">
-//           {formatPrice(localMaxPrice)} تومان
-//         </div>
-
-//         <input
-//           aria-label="حداکثر قیمت"
-//           type="range"
-//           min={min}
-//           max={max}
-//           value={localMaxPrice}
-//           onChange={(e) => setLocalMaxPrice(Number(e.target.value))}
-//           className="w-full"
-//         />
-//       </div>
-
-//       <div className="flex justify-end mt-3">
-//         <button
-//           onClick={handleApply}
-//           className="bg-green-300 p-2 rounded"
-//           type="button"
-//         >
-//           اعمال تغییرات
-//         </button>
-//       </div>
-//     </aside>
-//   );
-// }

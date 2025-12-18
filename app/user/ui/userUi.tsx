@@ -4,7 +4,7 @@ import Dashboard from "./dashbord";
 import Orders from "./orders";
 import Settings from "./setting";
 import Exit from "./exit";
-import Auth from "@/app/api/auth";
+// import Auth from "@/app/api/auth";
 import useAuth from "@/app/context/auth";
 import { redirect } from "next/navigation";
 // import Image from "next/image";

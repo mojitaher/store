@@ -1,7 +1,8 @@
 "use client";
 
-import { Card, Badge, Button } from "flowbite-react";
+import { Badge, Button } from "flowbite-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export interface Product {
   id: number;
@@ -23,36 +24,70 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <div className="flex justify-center">
-      <Card
-        className="max-w-sm w-full"
-        imgAlt={product.title}
-        imgSrc={product.images[0]}
-      >
-        <div className="flex flex-col gap-4">
-          <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-1">
-            {product.title}
-          </h5>
+    <div className="relative group w-[300px] h-1/2 max-w-sm ">
+      {/* Image Section */}
+      <div className="relative h-72 w-full overflow-hidden rounded-3xl bg-gray-100">
+        <Image
+          src={product.images[0]}
+          alt={product.title}
+          fill
+          priority
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
+        />
 
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-sm text-gray-500">سایز:</span>
-            {product.sizes.map((size) => (
-              <Badge key={size} color="info" className="px-2 py-1">
-                {size}
-              </Badge>
-            ))}
-          </div>
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-          <div className="flex items-center justify-between">
-            <span className="text-2xl font-bold text-gray-900 dark:text-white">
-              ${product.price}
-            </span>
-            <Button color="blue" size="sm">
-              <Link href={`/products/${product.id}`}>خرید کنید</Link>
+        {/* Category */}
+        <span className="absolute top-4 right-4 rounded-full bg-white/90 px-4 py-1 text-xs font-semibold text-gray-900 shadow">
+          {product.category.name}
+        </span>
+
+        {/* Hover CTA */}
+        <div className="absolute inset-0 flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100 transition-all duration-300">
+          <Link href={`/products/${product.id}`}>
+            <Button className="rounded-full bg-white text-gray-900 hover:bg-gray-100">
+              مشاهده جزئیات
             </Button>
-          </div>
+          </Link>
         </div>
-      </Card>
+      </div>
+
+      {/* Content */}
+      <div className="mt-4 flex flex-col gap-3">
+        <h3 className="text-lg font-semibold text-gray-900 line-clamp-1">
+          {product.title}
+        </h3>
+
+        {/* Sizes */}
+        <div className="flex flex-wrap gap-2">
+          {product.sizes.map((size) => (
+            <Badge
+              key={size}
+              color="gray"
+              className="rounded-full px-3 py-0.5 text-xs"
+            >
+              {size}
+            </Badge>
+          ))}
+        </div>
+
+        {/* Price + Buy */}
+        <div className="flex items-center justify-between pt-2">
+          <span className="text-2xl font-bold tracking-tight text-gray-900">
+            ${product.price}
+          </span>
+
+          <Link href={`/products/${product.id}`}>
+            <Button
+              size="sm"
+              className="rounded-full bg-blue-600 px-5 hover:bg-blue-700"
+            >
+              خرید
+            </Button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
