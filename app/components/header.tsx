@@ -16,6 +16,8 @@ import { useState } from "react";
 import useAuth from "../context/auth";
 import Link from "next/link";
 import { Button } from "flowbite-react";
+import CartModal from "./feature/CartModal";
+import { useCart } from "../context/cart";
 
 type CartItem = {
   id: number;
@@ -25,27 +27,29 @@ type CartItem = {
   quantity: number;
 };
 
-const dummyCart: CartItem[] = [
-  {
-    id: 1,
-    title: "کرم آبرسان",
-    price: 230000,
-    img: "/rozh-lab.jpg",
-    quantity: 1,
-  },
-  {
-    id: 2,
-    title: "سرم صورت",
-    price: 320000,
-    img: "/rozh-lab.jpg",
-    quantity: 2,
-  },
-];
+// const dummyCart: CartItem[] = [
+//   {
+//     id: 1,
+//     title: "کرم آبرسان",
+//     price: 230000,
+//     img: "/rozh-lab.jpg",
+//     quantity: 1,
+//   },
+//   {
+//     id: 2,
+//     title: "سرم صورت",
+//     price: 320000,
+//     img: "/rozh-lab.jpg",
+//     quantity: 2,
+//   },
+// ];
 
 export default function Header() {
   const { user, isLogin, logout } = useAuth();
+  const { cart } = useCart();
   const [login, setlogin] = useState(false);
   const [regester, setRegester] = useState(false);
+  // const [cart, setCart] = useState<CartItem[]>([]);
   const [showCart, setShowCart] = useState(false);
 
   return (
@@ -83,11 +87,12 @@ export default function Header() {
               <button className="relative">
                 <ShoppingCart size={30} />
                 <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-                  {dummyCart.length}
+                  {cart.length}
                 </span>
               </button>
+              {showCart && <CartModal onClose={() => setShowCart(false)} />}
 
-              {showCart && (
+              {/* {showCart && (
                 <div className="absolute left-0 mt-4 w-72 bg-white shadow-xl p-4 rounded-xl border border-gray-200 z-50 animate-fadeIn">
                   <h3 className="font-bold mb-3 text-lg">سبد خرید</h3>
                   <div className="space-y-3 max-h-60 overflow-y-auto">
@@ -118,8 +123,8 @@ export default function Header() {
                   <button className="w-full bg-red-500 text-white py-2 rounded-lg mt-3">
                     مشاهده سبد خرید
                   </button>
-                </div>
-              )}
+                </div> */}
+              {/* )} */}
             </div>
           )}
 

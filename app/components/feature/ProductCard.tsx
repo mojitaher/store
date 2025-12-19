@@ -3,6 +3,18 @@
 import { Badge, Button } from "flowbite-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useCart } from "@/app/context/cart";
+
+export interface ProductCart {
+  product: {
+    id: number;
+    title: string;
+    text: string;
+    qty: number;
+    price: number;
+    img?: string;
+  };
+}
 
 export interface Product {
   id: number;
@@ -23,6 +35,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const { addToCart } = useCart();
   return (
     <div className="relative group w-[300px] h-1/2 max-w-sm ">
       {/* Image Section */}
@@ -78,14 +91,13 @@ export default function ProductCard({ product }: ProductCardProps) {
             ${product.price}
           </span>
 
-          <Link href={`/products/${product.id}`}>
-            <Button
-              size="sm"
-              className="rounded-full bg-blue-600 px-5 hover:bg-blue-700"
-            >
-              خرید
-            </Button>
-          </Link>
+          <Button
+            size="sm"
+            className="rounded-full bg-blue-600 px-5 hover:bg-blue-700"
+            onClick={() => addToCart(product)}
+          >
+            خرید
+          </Button>
         </div>
       </div>
     </div>

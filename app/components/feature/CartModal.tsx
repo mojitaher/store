@@ -1,3 +1,4 @@
+import { useCart } from "@/app/context/cart";
 import { Trash2 } from "lucide-react";
 
 export interface CartItem {
@@ -9,36 +10,14 @@ export interface CartItem {
   img: string;
 }
 
-interface Props {
-  cart: CartItem[];
-  setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
-}
-
-export default function CartModal({ cart, setCart }: Props) {
-  const increase = (id: number) => {
-    setCart((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, qty: item.qty + 1 } : item
-      )
-    );
-  };
-
-  const decrease = (id: number) => {
-    setCart((prev) =>
-      prev
-        .map((item) =>
-          item.id === id ? { ...item, qty: item.qty - 1 } : item
-        )
-        .filter((item) => item.qty > 0)
-    );
-  };
-
-  const removeItem = (id: number) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
-  };
+export default function CartModal() {
+  const { cart, removeItem, increase, decrease } = useCart();
 
   return (
-    <div className="absolute top-12 right-0 w-96 bg-white shadow-2xl rounded-2xl p-4 z-50 max-h-[500px] overflow-y-auto">
+    <div
+      className="absolute top-12 left-0 w-96 bg-white shadow-2xl rounded-2xl p-4 z-50 max-h-[500px] overflow-y-auto"
+      onClick={(e) => e.stopPropagation()}
+    >
       <h3 className="text-lg font-semibold mb-4">سبد خرید</h3>
 
       {cart.length === 0 && (
@@ -62,7 +41,7 @@ export default function CartModal({ cart, setCart }: Props) {
               <p className="text-xs text-gray-500">{item.text}</p>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 text-black">
               {item.qty === 1 ? (
                 <button
                   onClick={() => removeItem(item.id)}
